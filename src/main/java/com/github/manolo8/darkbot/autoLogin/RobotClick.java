@@ -109,7 +109,7 @@ public class RobotClick {
         robot.mouseMove(rect[0] + 928, rect[1] + 68);
         robot.mousePress(16);
         robot.mouseRelease(16);
-        robot.delay(1000);
+        robot.delay(500);
         StringSelection selection = new StringSelection(user);
         clipboard.setContents(selection, selection);
         robot.mousePress(4);
