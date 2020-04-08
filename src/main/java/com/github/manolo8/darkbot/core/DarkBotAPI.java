@@ -22,7 +22,11 @@ public class DarkBotAPI extends AbstractDarkBotApi {
         }, "BotBrowser").start();
         new Thread(() -> {
             while ((window = USER_32.FindWindow("DarkBrowser", "DarkBrowser")) == null || !USER_32.IsWindow(window)) Time.sleep(100);
-            LegacyAutoLogin.tryLogin();
+            try {
+                LegacyAutoLogin.tryLogin();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }).start();
 
     }

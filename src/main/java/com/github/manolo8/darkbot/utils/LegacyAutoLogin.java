@@ -46,66 +46,21 @@ public class LegacyAutoLogin {
     }
 
 
-    public static void tryLogin(){
+    public static void tryLogin() throws IOException, InterruptedException, GetWindowRectException, WindowNotFoundException, AWTException {
         String user = null, password = null;
         File file = new File("login.txt");
-        boolean redo=true;
-        do{
-            try {
-                file.createNewFile();
-                redo=false;
-            } catch (IOException e) {
-                redo=true;
-            }
-        }while(redo);
-
+        file.createNewFile();
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-        redo=true;
-        do{
-            try {
-                Scanner sc = new Scanner(file);
-                user = sc.nextLine();
-                password = sc.nextLine();
-                redo=false;
-            } catch (IOException e) {
-                redo=true;
-            }
-        }while(redo);
-
+        Scanner sc = new Scanner(file);
+        user = sc.nextLine();
+        password = sc.nextLine();
         String windowName = "DarkBrowser";
-        redo=true;
-        do{
-            try {
-                Thread.sleep(1000);
-                redo=false;
-            } catch (InterruptedException e) {
-                redo=true;
-            }
-        }while(redo);
-
+        Thread.sleep(1000);
         int[] rect = new int[0];
-        redo=true;
-        do{
-            try {
-                rect = getRect(windowName);
-                redo=false;
-            } catch (Exception e) {
-                redo=true;
-            }
-        }while(redo);
-
+        rect = getRect(windowName);
         System.out.printf("The corner locations for the window \"%s\" are %s", new Object[] { windowName, Arrays.toString(rect) });
         Robot robot = null;
-        redo=true;
-        do{
-            try {
-                robot = new Robot();
-                redo=false;
-            } catch (AWTException e) {
-                redo=true;
-            }
-        }while(redo);
-
+        robot = new Robot();
         robot.mouseMove(rect[0] + 928, rect[1] + 68);
         robot.mousePress(16);
         robot.mouseRelease(16);
